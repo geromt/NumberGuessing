@@ -8,11 +8,11 @@
             Random random = new Random();
             int winnerNumber = random.Next(0, 101);
             int guessedNumber;
-            int triesCount = 0;
+            int triesCount = 6;
 
-            while (true)
+            while (triesCount > 0)
             {
-                Console.WriteLine("Guess a number:");
+                Console.WriteLine(string.Format("Guess a number, you've {0} tries left:", triesCount));
                 var inputNumber = Console.ReadLine();
 
                 if (!int.TryParse(inputNumber, out guessedNumber))
@@ -28,11 +28,16 @@
                 else
                     break;
 
-                triesCount++;
+                triesCount--;
             }
 
-            Console.WriteLine("Congratulations! You've guess the right number");
-            Console.WriteLine(string.Format("You only take {0} tries", triesCount));
+            if (triesCount == 0)
+                Console.WriteLine("You lose");
+            else
+            {
+                Console.WriteLine("Congratulations! You've guess the right number");
+                Console.WriteLine(string.Format("You only take {0} tries", triesCount));
+            }
 
             Console.ReadLine();
         }
